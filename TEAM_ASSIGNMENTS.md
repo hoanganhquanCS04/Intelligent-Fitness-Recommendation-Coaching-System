@@ -19,31 +19,32 @@
 
 ---
 
-### 👤 Member 1 — CV Data Engineer (Dataset & Drive Pipeline)
+### 👤 Member 1 — CV Data Engineer (Dataset Preprocessing & Pipeline)
 
-**Trách nhiệm chính:** Thu thập, chuẩn hóa, annotate toàn bộ dataset hình ảnh/video tập gym và tổ chức trên Google Drive. Toàn bộ nhóm phụ thuộc vào dataset của bạn để train model.
+**Trách nhiệm chính:** Xử lý dataset hình ảnh tập gym từ CSV keypoints có sẵn, chuẩn hóa, tổ chức theo YOLO format và upload lên Google Drive. Toàn bộ nhóm phụ thuộc vào dataset của bạn để train model.
+
+**🔴 UPDATE:** Dataset đã có CSV với keypoints sẵn → **KHÔNG CẦN ANNOTATION THỦ CÔNG**
 
 #### Nhiệm vụ theo Phase
 
-**Phase 1: Thu thập & Tổ chức Dataset**
+**Phase 1: ✅ Hoàn thành — Dataset đã tải từ Drive**
 
-| Task | Mô tả | Output (Google Drive path) |
+| Task | Status | Output |
 |---|---|---|
-| 1.1 | Tích hợp **MPII dataset** (~25K ảnh, `.mat`) | `Drive:/data/cv/raw/mpii/` |
-| 1.2 | Crawl video YouTube bằng `yt-dlp`, extract frame @10fps bằng OpenCV | `Drive:/data/cv/raw/youtube/` |
-| 1.3 | Tích hợp **Leeds Sport Pose** (2K+ sport action images) | `Drive:/data/cv/raw/leeds/` |
-| 1.4 | Tự chụp thêm tại gym (≥ 4 người · 3 bài: squat, deadlift, bench) | `Drive:/data/cv/raw/self_captured/` |
-| 1.5 | Chuẩn hóa nhãn class: `squat` / `deadlift` / `bench_press` | `schemas/exercise_schema.json` |
+| 1.1 | ✅ DONE | Squat dataset: 2,837 images (từ 59 videos) |
+| 1.2 | ✅ DONE | CSV keypoints: `yolo_keypoints_cleaned_final.csv` (18 điểm x0,y0 → x17,y17) |
+| 1.3 | ✅ DONE | Folder structure: `squat/video_id/*.jpg` |
 
-**Phase 2: Preprocessing & Annotation**
+**Phase 2: Preprocessing & Format Conversion (CURRENT PHASE)**
 
-| Task | Mô tả | Output |
-|---|---|---|
-| 2.1 | Resize tất cả ảnh về **640×640**, normalize trên Colab A100 | `Drive:/data/cv/processed/` |
-| 2.2 | Upload lên **Roboflow** / **CVAT**, annotate 17 keypoints + class label | Roboflow project |
-| 2.3 | Export sang **YOLO pose `.txt` format** | `Drive:/data/cv/annotated/` |
-| 2.4 | Tạo **data.yaml** định nghĩa đường dẫn + class | `Drive:/data/cv/data.yaml` |
-| 2.5 | Chia split **70/15/15** (train/val/test) | `Drive:/data/cv/splits/` |
+| Task | Mô tả | Output | Status |
+|---|---|---|---|
+| 2.1 | **Filter CSV** → chỉ giữ rows tương ứng với ảnh đã tải về | `squat_local_filtered.csv` | ✅ DONE |
+| 2.2 | **Convert CSV → YOLO .txt** labels với normalized bbox + keypoints | `cv_dataset/all_labels/*.txt` | ✅ DONE |
+| 2.3 | **Resize images** về 640×640 (or keep original nếu training tự resize) | `cv_dataset/images_resized/` | ⏳ TODO |
+| 2.4 | **Split dataset** 70/15/15 (train/val/test) | `cv_dataset/train/`, `val/`, `test/` | ⏳ TODO |
+| 2.5 | **Tạo data.yaml** config file cho YOLO | `cv_dataset/data.yaml` | ⏳ TODO |
+| 2.6 | **Verify dataset** — check images + labels match, visualize samples | Quality report | ⏳ TODO |
 
 **Phase 3: Augmentation & Mở rộng**
 
