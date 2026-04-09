@@ -21,9 +21,13 @@ ENV/
 .ipynb_checkpoints/
 
 # ── Data & Models (lớn, chia sẻ qua Drive)
+GYM\ data/
+GYM data/
 data/raw/
 data/pose_sequences/
 data/frames/
+models/
+*.pt
 *.pth
 *.pkl
 *.h5
