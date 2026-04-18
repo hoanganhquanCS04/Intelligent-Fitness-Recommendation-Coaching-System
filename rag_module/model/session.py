@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from pytz import timezone
 from rag_module.util.database import Model
 
 class Session(Model):
@@ -9,9 +8,8 @@ class Session(Model):
 
     session_id = Column(String, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
-    user = relationship("User", back_populates="sessions")
-    created_at = Column(String, nullable=True, default=datetime.now(timezone('Asia/Seoul')).strftime("%Y-%m-%d %H:%M:%S"))
-    updated_at = Column(String, nullable=True, default=datetime.now(timezone('Asia/Seoul')).strftime("%Y-%m-%d %H:%M:%S"))
+    
+    created_at = Column(DateTime, nullable=True, default=datetime.now())
+    updated_at = Column(DateTime, nullable=True, default=datetime.now(), onupdate=datetime.now())
 
-    def __init__(self):
-        pass
+    user = relationship("User", back_populates="sessions")

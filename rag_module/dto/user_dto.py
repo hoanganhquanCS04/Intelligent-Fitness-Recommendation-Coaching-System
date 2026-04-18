@@ -1,16 +1,16 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class UserDTO(BaseModel):
-    id: int
-    username: str
-    email: str
-    password: str
-    full_name: str | None = None
-    birth: str | None = None
-    gender: str | None = None
-    height: int | None = None  
-    weight: int | None = None
-    goal: str | None = None
-    exercise_favourite: str | None = None
-    diet_favourite: str | None = None
-    practice_plan: str | None = None
+    id: int | None = Field(required=False, default=None)
+    username: str = Field(required=False)
+    email: str = Field(required=False)
+    password: str = Field(required=False)
+    full_name: str = Field(default=None)
+    birth: str = Field(default=None)
+    gender: str = Field(default=None)
+    height: int | None = Field(default=None)
+    weight: int | None = Field(default=None)
+    goal: str | None = Field(default=None)
+    exercise_favourite: str | None = Field(default=None)
+    diet_favourite: str | None = Field(default=None)
+    practice_plan: str | None = Field(default=None)

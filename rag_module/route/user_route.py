@@ -1,16 +1,32 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Body, Depends
+from fastapi.security import HTTPBearer
 from rag_module.service.user_service import UserService
+from rag_module.dto.user_dto import UserDTO
+from rag_module.util.jwt import get_credentials
 
-router = APIRouter()
+user_router = APIRouter()
 
-class UserRoute:
-    def __init__(self, userService: UserService = Depends(UserService)):
-        self.userService = userService
-    
-    @router.post("/api/public/v1/users")
-    def create_user(self, user_dto):
-        return self.userService.create_user(user_dto)
-    
-    @router.get(f"/api/public/v1/users/{{user_id}}")
-    def get_user(self, user_id: int):
-        return self.userService.get_user(user_id)
+security = HTTPBearer()
+
+@user_router.get(f"/api/public/v1/users")
+def get_current_user(
+    credentials=Depends(get_credentials),
+    user_service: UserService = Depends(UserService),
+):
+    return user_service.get_current_user(credentials)
+
+
+@user_router.post(f"/api/public/v1/users/register")
+def register_user(
+    user_dto: UserDTO = Body(),
+    user_service: UserService = Depends(UserService),
+):
+    return user_service.create_user(user_dto)
+
+
+@user_router.post(f"/api/public/v1/users/login")
+def login_user(
+    user_dto: UserDTO = Body(),
+    user_service: UserService = Depends(UserService),
+):
+    return user_service.login_user(user_dto)
