@@ -10,12 +10,14 @@ google-api-python-client==2.120.0 # YouTube Data API v3
 requests==2.31.0
 beautifulsoup4==4.12.3
 
-# ── Pose Recognition (Member 2) ───────────────────────────
-mediapipe==0.10.11               # Pose extraction (33 keypoints)
-numpy==1.26.4
-torch==2.2.0                     # LSTM / GRU training
+# ── Computer Vision Core (Member 2) ───────────────────────
+ultralytics==8.3.0               # YOLOv8/11 Engine (Pose & Cls)
+opencv-python==4.9.0.80          # Image & Video Processing
+numpy==1.26.4                    # Tensor & Matrix operations
+torch==2.2.0                     # Neural Network Backend
 torchvision==0.17.0
-scikit-learn==1.4.0              # MLP baseline, metrics
+scikit-learn==1.4.0              # Metrics
+ipython==8.22.2                  # Notebook visualizations
 
 # ── Recommendation System (Member 3) ──────────────────────
 pandas==2.2.1

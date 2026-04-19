@@ -58,4 +58,9 @@ frontend/.env
 
 # ── PDF exports (generated, không cần track)
 *.pdf
-convert_to_pdf.py
+# ── Large Binaries ────────────────────────
+*.zip
+*.mp4
+*.rar
+*.7z
+.claude/
