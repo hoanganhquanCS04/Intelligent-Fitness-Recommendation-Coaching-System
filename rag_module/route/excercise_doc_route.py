@@ -18,4 +18,4 @@ class ExerciseDocRoute:
 
     @exercise_doc_router.post(f"/api/public/v1/excercise_docs")
     def get_exercise_doc(credentials: int = Depends(get_credentials), query_param: DocExerciseQuery = Depends(), query: str = Body(), exercise_doc_service: ExerciseDocService = Depends()):
-        return exercise_doc_service.get_exercise_doc(credentials, query_param, query)
+        return {"data": exercise_doc_service.get_exercise_doc(credentials, query_param, query)}

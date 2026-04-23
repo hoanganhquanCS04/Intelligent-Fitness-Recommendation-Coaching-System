@@ -24,7 +24,7 @@ class EmbeddingService:
     @modal.enter()
     def __init__(self):
         from sentence_transformers import SentenceTransformer
-        self.embedding_model = SentenceTransformer(os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2"), cache_folder="/.cache")
+        self.embedding_model = SentenceTransformer(os.getenv("EMBEDDING_MODEL_NAME2", "all-MiniLM-L6-v2"), cache_folder="/.cache")
 
     @modal.method()
     def get_embedding(self, text: str):

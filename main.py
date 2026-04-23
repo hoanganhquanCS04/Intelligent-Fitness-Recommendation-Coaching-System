@@ -23,7 +23,7 @@ def create_db_tables():
 
 async def lifespan(app: FastAPI):
     create_db_tables()
-    app.state.embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL_NAME"))
+    app.state.embeddings = HuggingFaceEmbeddings(model_name=os.getenv("EMBEDDING_MODEL_NAME2"))
     app.state.vector_store_1 = PGVector(
             connection=DB_URI,
             collection_name=COLLECTION_1,

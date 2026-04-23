@@ -21,7 +21,13 @@ class RAGModel2:
             api_key=os.getenv("GEMINI_API_KEY"),
             temperature=0.1
         )
-
+        # self.llm = ChatOpenAI(
+        #     model=os.getenv("CHAT_MODEL_NAME"),
+        #     base_url="https://pmquan30102004--llm-service-serve.modal.run/v1",
+        #     api_key="abc",
+        #     max_tokens=32768,
+        #     temperature=0.1
+        # )
         self.embeddings = request.app.state.embeddings
         self.vector_store_1 = request.app.state.vector_store_1
         self.vector_store_2 = request.app.state.vector_store_2

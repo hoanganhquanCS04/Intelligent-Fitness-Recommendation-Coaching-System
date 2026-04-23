@@ -13,6 +13,8 @@ class ExerciseDoc(Model):
     level = Column(String, nullable=True)
     instrument = Column(String, nullable=True)
     instruction = Column(String, nullable=True)
+    image = Column(String, nullable=True)
+    video = Column(String, nullable=True)
 
     created_at = Column(DateTime, nullable=True, default=datetime.now())
     updated_at = Column(DateTime, nullable=True, default=datetime.now(), onupdate=datetime.now())

@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 class UserDTO(BaseModel):
     id: int | None = Field(required=False, default=None)
     username: str = Field(required=False)
-    email: str = Field(required=False)
+    email: str = Field(required=False, default=None)
     password: str = Field(required=False)
     full_name: str = Field(default=None)
     birth: str = Field(default=None)

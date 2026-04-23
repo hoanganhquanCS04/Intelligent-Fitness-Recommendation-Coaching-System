@@ -4,7 +4,7 @@ from langchain_postgres import PGVectorStore
 
 class EmbeddingModel:
     def __init__(self, collection_name="fitness_coach_embeddings"):
-        self.model_name = os.getenv("=EMBEDDING_MODEL_NAME")
+        self.model_name = os.getenv("=EMBEDDING_MODEL_NAME2")
         self.embeddings = HuggingFaceEmbeddings(model_name=self.model_name)
         self.vector_store = PGVectorStore(connection=os.getenv("db_connection_string"), collection_name=collection_name, embeddings=self.embeddings)
     

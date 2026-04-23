@@ -15,11 +15,11 @@ class AnswerService:
     #     result = self.rag_model.ask(question)
     #     return result
     
-    def get_answer_v2(self, question):
+    def get_answer_v2(self, credentials: int, question: str):
         session = self.session_repository.get_session_by_id(self.session_id)
+        user = self.user_repository.get_user_by_id(credentials)
         if not session:
-            raise Exception("Session not found")
-        user = self.user_repository.get_user_by_id(session.user_id)
+            session = self.session_repository.create_session(user)
         question += f"""
             User's full name: {user.full_name}
             User's goal: {user.goal}

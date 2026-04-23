@@ -29,4 +29,4 @@ def login_user(
     user_dto: UserDTO = Body(),
     user_service: UserService = Depends(UserService),
 ):
-    return user_service.login_user(user_dto)
+    return {"jwt": user_service.login_user(user_dto)}
