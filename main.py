@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from langchain_postgres import PGVector
 from rag_module.route.answer_route import answer_router
 from rag_module.route.excercise_doc_route import exercise_doc_router
@@ -42,6 +43,12 @@ app.include_router(answer_router)
 app.include_router(exercise_doc_router)
 app.include_router(user_router)
 app.include_router(session_router)
+
+app.mount(
+    "/media",
+    StaticFiles(directory="data/Knowedge_base_RAG/exercises"),
+    name="media"
+)
 
 if __name__ == "__main__":
     run(app, host="localhost", port=8000)
